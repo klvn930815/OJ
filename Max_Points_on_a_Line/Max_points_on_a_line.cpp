@@ -12,7 +12,25 @@ struct Point {
 
     Point(int a, int b) : x(a), y(b) {}
 };
-
+struct pairhash
+{
+    template<class T1, class T2>
+    size_t operator() (const pair<T1, T2> &x) const
+    {
+        hash<T1> h1;
+        hash<T2> h2;
+        return h1(x.first) ^ h2(x.second);
+    }
+};
+struct EqualKey
+{
+    template<class T1, class T2>
+    bool operator () (const pair<T1, T2> &lhs,const pair<T1, T2> &rhs) const
+    {
+        return lhs.first  == rhs.first
+               && lhs.second == rhs.second;
+    }
+};
 class Solution {
 public:
     int maxPoints(vector<Point>& points) {
@@ -20,7 +38,7 @@ public:
         for (int i = 0; i < points.size(); ++i) {
             int duplicate = 0;
             int localmax = 0;
-            map<pair<int,int>,int> slopes;
+            unordered_map<pair<int,int>,int,pairhash,EqualKey> slopes;
             for (int j = i + 1; j < points.size(); ++j) {
                 if(points[j].x == points[i].x){
                     if(points[j].y == points[i].y){
