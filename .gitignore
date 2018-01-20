@@ -28,14 +28,9 @@
 *.out
 *.app
 
+README.md~
+
 .idea/
 main.cpp
 cmake-build-debug/
 CMakeLists.txt
-将删除 cmake-build-debug/CMakeFiles/CMakeTmp/
-将删除 cmake-build-debug/CMakeFiles/OJ.dir/Longest_Substring_Without_Repeating_Characters/
-将删除 cmake-build-debug/CMakeFiles/OJ.dir/add_two_num/
-将删除 cmake-build-debug/CMakeFiles/OJ.dir/word_ladder/
-
-将删除 cmake-build-debug/CMakeFiles/OJ.dir/LRU_cache/
-将删除 cmake-build-debug/CMakeFiles/OJ.dir/Max_Points_on_a_Line/
