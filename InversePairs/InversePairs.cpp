@@ -12,33 +12,33 @@ public:
         if(data.size() <= 1){
             return 0;
         }
-        long long inv_num = 0;
-        vector<int> output(data.size(), 0);
+        vector<int> output(data);
         int ind, length = 1;
-        while (length <= data.size()){
-            ind = 0;
-            while(ind + 2 * length <= data.size()){
-                inv_num += Merge(data, output, ind, ind + length - 1, ind + 2 * length -1);
-                ind += 2 * length;
-            }
-            if(ind + length <= data.size()){
-                inv_num += Merge(data, output, ind, ind + length - 1, data.size() - 1);
-            }
-            data.swap(output);
-            length *= 2;
-        }
-        return (int)(inv_num % 1000000007);
+        int inv_num = MergeSort(data, output, 0, data.size() - 1);
+        return inv_num % 1000000007;
     }
-    long long Merge(vector<int> &data, vector<int> &output, int start, int mid, int end){
-        long long num = 0;
+    int MergeSort(vector<int> &data, vector<int> &output, int start, int end){
+        if(end > start){
+            int mid = start + (end - start) / 2;
+            int left = MergeSort(data, output, start, mid), right = MergeSort(data, output, mid + 1, end);
+            return (Merge(data, output, start, mid, end) + left + right) % 1000000007;
+        }
+        return 0;
+    }
+    int Merge(vector<int> &data, vector<int> &output, int start, int mid, int end){
+        int num = 0;
         int ind = end;
         int i = mid, j = end;
+        // 从尾部开始
         while (i >= start && j >= mid + 1) {
             if(data[i] <= data[j]){
                 output[ind--] = data[j--];
             }else{
                 output[ind--] = data[i--];
                 num += (j - mid);
+                if(num >= 1000000007){
+                    num %= 1000000007;
+                }
             }
         }
         while(i >= start){
@@ -47,7 +47,9 @@ public:
         while(j >= mid + 1){
             output[ind--] = data[j--];
         }
-        return num;
+        for (int k = start; k <= end; ++k) {
+            data[k] = output[k];
+        }
+        return num % 1000000007;
     }
-
 };
