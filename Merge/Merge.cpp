@@ -53,4 +53,25 @@ public:
         }
         return newHead;
     }
+    ListNode* Merge_2(ListNode* pHead1, ListNode* pHead2)
+    {
+        ListNode *nil1 = new ListNode(999);
+        nil1->next = pHead1;
+        ListNode* pre = nil1, *cur1 = pHead1, *cur2 = pHead2;
+        while(cur1 && cur2){
+            if(cur2->val < cur1->val){
+                pre->next = cur2;
+                cur2 = cur2->next;
+                pre->next->next = cur1;
+            }
+            else{
+                cur1 = cur1->next;
+            }
+            pre = pre->next;
+        }
+        if(cur2){
+            pre->next = cur2;
+        }
+        return nil1->next;
+    }
 };
