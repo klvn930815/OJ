@@ -2,8 +2,10 @@
 // Created by Qiezz on 18-3-10.
 //
 
-/**
- * 处理str1，把在str2中没出现的字符删除，并返回str1。
+/*
+ * 题目：处理str1，把在str2中没出现的字符删除，并返回str1。
+ *
+ * 思路：
  * 先遍历一遍str2, 用vector记录每个字符是否出现过，字符直接作为下标，
  * 然后用两个指针遍历str1,两个指针一起出发，
  * 如果第一个指针指向的字符在str2存在，就把该字符复制给第二个指针的位置，然后两个指针都向后移动一位
@@ -37,10 +39,10 @@ char* intersectStr(char *str1, char *str2){
     return str1;
 }
 
-int main(){
-    char str1[] = "Welcome CVTE";
-    char str2[] = "KEem";
-    char *res = intersectStr(str1, str2);
-    for(int i = 0; res[i]!='\0'; ++i)
-        cout<<res[i];
-}
+//int main(){
+//    char str1[] = "Welcome CVTE";
+//    char str2[] = "KEem";
+//    char *res = intersectStr(str1, str2);
+//    for(int i = 0; res[i]!='\0'; ++i)
+//        cout<<res[i];
+//}
